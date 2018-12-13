@@ -3,12 +3,13 @@
 #include <map>
 #include <vector>
 #include <assert.h>
+#include <utility>
 
 
 std::map<char, int> getLetterDistribution(std::string word)
 {
     std::map<char, int> letters;
-        
+
     for (auto& c : word)
     {
         if (letters.count(c) == 0)
@@ -50,7 +51,7 @@ int calculateChecksum(const std::vector<std::string>& ids)
 {
     int letterTwiceCount = 0;
     int letterThreeTimesCount = 0;
-    
+
     for (auto& id : ids)
     {
         std::map<char, int> distribution = getLetterDistribution(id);
@@ -65,6 +66,52 @@ int calculateChecksum(const std::vector<std::string>& ids)
     }
 
     return letterTwiceCount * letterThreeTimesCount;
+}
+
+std::pair<std::string, std::string> findWordsWhichDifferByOneLetter(
+    const std::vector<std::string>& words)
+{
+    for (int listPos = 0; listPos < words.size(); ++listPos)
+    {
+        for (int candidatePos = listPos + 1; candidatePos < words.size(); ++candidatePos)
+        {
+            int matches = 0;
+            const std::string& word = words[listPos];
+            const std::string& candidate = words[candidatePos];
+
+            assert(word.size() == candidate.size());
+            for (int i = 0; i < word.size(); ++i)
+            {
+                if (word[i] != candidate[i])
+                {
+                    matches++;
+                }
+            }
+
+            if (matches == 1)
+            {
+                return std::pair<std::string, std::string>(word, candidate);
+            }
+        }
+    }
+    return std::pair<std::string, std::string>();
+}
+
+std::string removeDifferentLetters(std::pair<std::string, std::string> words)
+{
+    assert(words.first.size() == words.second.size());
+
+    for (int i = 0; i < words.first.size(); ++i)
+    {
+        if (words.first[i] != words.second[i])
+        {
+            words.first.erase(i, 1);
+            words.second.erase(i, 1);
+            return removeDifferentLetters({words.first, words.second});
+        }
+    }
+
+    return words.first;
 }
 
 void test()
@@ -87,6 +134,13 @@ void test()
     assert(12 == calculateChecksum(
         {"abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab"}));
 
+    std::pair<std::string, std::string> ids = findWordsWhichDifferByOneLetter(
+        {"abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz"});
+    assert("fghij" == ids.first);
+    assert("fguij" == ids.second);
+
+    assert("fgij" == removeDifferentLetters(ids));
+    assert("aaccc" == removeDifferentLetters({"aabbccbbbc", "aaddccdddc", }));
 }
 
 int main(void)
@@ -102,6 +156,8 @@ int main(void)
     }
 
     std::cout << "Part 1 solution: " << calculateChecksum(ids) << std::endl;
+    std::cout << "Part 2 solution: " << removeDifferentLetters(
+        findWordsWhichDifferByOneLetter(ids)) << std::endl;
 
     return 0;
 }
