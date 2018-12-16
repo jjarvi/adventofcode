@@ -1,34 +1,15 @@
-#include <iostream>
+#include <fstream>
 #include <string>
-#include <sstream>
-#include <istream>
-#include <assert.h>
 #include <vector>
 #include <set>
 
+#include <gtest/gtest.h>
 
-std::vector<int> parseInput(std::istream& input)
-{
-    std::vector<int> values;
-    std::string line;
 
-    while (std::getline(input, line))
-    {
-        std::stringstream ss(line);
-        std::string num;
-        while (std::getline(ss, num, ' '))
-        {
-            values.push_back(std::stoi(num));
-        }
-    }
-
-    return values;
-}
-
-int sum(const std::vector<int>& values)
+static int sum(const std::vector<int>& values)
 {
     int s = 0;
-    
+
     for (auto& i : values)
     {
         s += i;
@@ -37,15 +18,15 @@ int sum(const std::vector<int>& values)
     return s;
 }
 
-int findFirstDuplicateFrequency(const std::vector<int>& deltas)
+static int findFirstDuplicateFrequency(const std::vector<int>& values)
 {
     std::set<int> frequencies;
     int freq = 0;
 
     while (true)
     {
-        for (auto& d : deltas)
-        {   
+        for (auto& d : values)
+        {
             if (frequencies.count(freq) == 0)
             {
                 frequencies.insert(freq);
@@ -59,33 +40,36 @@ int findFirstDuplicateFrequency(const std::vector<int>& deltas)
     }
 }
 
-void testPart1(int result, const std::string& input)
+TEST(Day01, sum)
 {
-    std::stringstream ss(input);
-    assert(result == sum(parseInput(ss)));
+    EXPECT_EQ(3, sum({1, 1, 1}));
 }
 
-void testPart2(int result, const std::vector<int>& deltas)
+TEST(Day01, duplicates)
 {
-    assert(result == findFirstDuplicateFrequency(deltas));
+    EXPECT_EQ(2,  findFirstDuplicateFrequency({1, -2, 3, 1}));
+    EXPECT_EQ(0,  findFirstDuplicateFrequency({1, -1}));
+    EXPECT_EQ(10, findFirstDuplicateFrequency({3, 3, 4, -2, -4}));
+    EXPECT_EQ(5,  findFirstDuplicateFrequency({-6, 3, 8, 5, -6}));
+    EXPECT_EQ(14, findFirstDuplicateFrequency({7, 7, -2, -7, -4}));
 }
 
-int main(void)
+TEST(Day01, solution)
 {
-    testPart1(3, "1, 1, 1");
-    testPart1(3, "1, 1\n1");
-    testPart1(0, "1, 1, -2");
-    testPart1(-6, "-1, -2, -3");
+    std::ifstream input("../day01_input.txt");
 
-    testPart2(2, {1, -2, 3, 1});
-    testPart2(0, {1, -1});
-    testPart2(10, {3, 3, 4, -2, -4});
-    testPart2(5, {-6, 3, 8, 5, -6});
-    testPart2(14, {7, 7, -2, -7, -4});
+    std::vector<int> values;
+    std::string line;
+    while (std::getline(input, line))
+    {
+        std::stringstream ss(line);
+        std::string num;
+        while (std::getline(ss, num, ' '))
+        {
+            values.push_back(std::stoi(num));
+        }
+    }
 
-    auto input = parseInput(std::cin);
-    std::cout << "Part 1 solution: " << sum(input) << std::endl;
-    std::cout << "Part 2 solution: " << findFirstDuplicateFrequency(input) << std::endl;
-
-    return 0;
+    EXPECT_EQ(420, sum(values));
+    EXPECT_EQ(227, findFirstDuplicateFrequency(values));
 }

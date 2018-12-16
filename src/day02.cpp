@@ -1,9 +1,11 @@
-#include <iostream>
+#include <fstream>
 #include <string>
 #include <map>
 #include <vector>
 #include <assert.h>
 #include <utility>
+
+#include <gtest/gtest.h>
 
 
 std::map<char, int> getLetterDistribution(std::string word)
@@ -114,50 +116,62 @@ std::string removeDifferentLetters(std::pair<std::string, std::string> words)
     return words.first;
 }
 
-void test()
+TEST(Day02, containsLetterTwice)
 {
-    assert(false == containsLetterTwice(getLetterDistribution("abcdef")));
-    assert(false == containsLetterThreeTimes(getLetterDistribution("abcdef")));
-    assert(true == containsLetterTwice(getLetterDistribution("bababc")));
-    assert(true == containsLetterThreeTimes(getLetterDistribution("bababc")));
-    assert(true == containsLetterTwice(getLetterDistribution("abbcde")));
-    assert(false == containsLetterThreeTimes(getLetterDistribution("abbcde")));
-    assert(false == containsLetterTwice(getLetterDistribution("abcccd")));
-    assert(true == containsLetterThreeTimes(getLetterDistribution("abcccd")));
-    assert(true == containsLetterTwice(getLetterDistribution("aabcdd")));
-    assert(false == containsLetterThreeTimes(getLetterDistribution("aabcdd")));
-    assert(true == containsLetterTwice(getLetterDistribution("abcdee")));
-    assert(false == containsLetterThreeTimes(getLetterDistribution("abcdee")));
-    assert(false == containsLetterTwice(getLetterDistribution("ababab")));
-    assert(true == containsLetterThreeTimes(getLetterDistribution("ababab")));
-
-    assert(12 == calculateChecksum(
-        {"abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab"}));
-
-    std::pair<std::string, std::string> ids = findWordsWhichDifferByOneLetter(
-        {"abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz"});
-    assert("fghij" == ids.first);
-    assert("fguij" == ids.second);
-
-    assert("fgij" == removeDifferentLetters(ids));
-    assert("aaccc" == removeDifferentLetters({"aabbccbbbc", "aaddccdddc", }));
+    EXPECT_TRUE(containsLetterTwice(getLetterDistribution("bababc")));
+    EXPECT_TRUE(containsLetterTwice(getLetterDistribution("abbcde")));
+    EXPECT_TRUE(containsLetterTwice(getLetterDistribution("aabcdd")));
+    EXPECT_TRUE(containsLetterTwice(getLetterDistribution("abcdee")));
+    EXPECT_FALSE(containsLetterTwice(getLetterDistribution("abcdef")));
+    EXPECT_FALSE(containsLetterTwice(getLetterDistribution("abcccd")));
+    EXPECT_FALSE(containsLetterTwice(getLetterDistribution("ababab")));
 }
 
-int main(void)
+TEST(Day02, containsLetterThreeTimes)
 {
-    test();
+    EXPECT_TRUE(containsLetterThreeTimes(getLetterDistribution("bababc")));
+    EXPECT_TRUE(containsLetterThreeTimes(getLetterDistribution("abcccd")));
+    EXPECT_TRUE(containsLetterThreeTimes(getLetterDistribution("ababab")));
+    EXPECT_FALSE(containsLetterThreeTimes(getLetterDistribution("abbcde")));
+    EXPECT_FALSE(containsLetterThreeTimes(getLetterDistribution("abcdef")));
+    EXPECT_FALSE(containsLetterThreeTimes(getLetterDistribution("aabcdd")));
+    EXPECT_FALSE(containsLetterThreeTimes(getLetterDistribution("abcdee")));
+}
 
+TEST(Day02, checksum)
+{
+    EXPECT_EQ(12, calculateChecksum(
+        {"abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab"}));
+}
+
+TEST(Day02, differByOneLetter)
+{
+    std::pair<std::string, std::string> ids = findWordsWhichDifferByOneLetter(
+        {"abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz"});
+    ASSERT_EQ("fghij", ids.first);
+    ASSERT_EQ("fguij", ids.second);
+}
+
+TEST(Day02, removeDifferentLetters)
+{
+    std::pair<std::string, std::string> ids = findWordsWhichDifferByOneLetter(
+        {"abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz"});
+    ASSERT_EQ("fgij", removeDifferentLetters(ids));
+    ASSERT_EQ("aaccc", removeDifferentLetters({"aabbccbbbc", "aaddccdddc", }));
+}
+
+TEST(Day02, solution)
+{
+    std::ifstream input("../day02_input.txt");
     std::vector<std::string> ids;
-
     std::string id;
-    while (std::getline(std::cin, id))
+
+    while (std::getline(input, id))
     {
         ids.push_back(id);
     }
 
-    std::cout << "Part 1 solution: " << calculateChecksum(ids) << std::endl;
-    std::cout << "Part 2 solution: " << removeDifferentLetters(
-        findWordsWhichDifferByOneLetter(ids)) << std::endl;
-
-    return 0;
+    EXPECT_EQ(7657, calculateChecksum(ids));
+    EXPECT_EQ("ivjhcadokeltwgsfsmqwrbnuy",
+        removeDifferentLetters(findWordsWhichDifferByOneLetter(ids)));
 }
