@@ -7,10 +7,13 @@
 
 #include <gtest/gtest.h>
 
+using LetterDistribution = std::map<char, int>;
+using StringPair = std::pair<std::string, std::string>;
 
-static std::map<char, int> getLetterDistribution(std::string word)
+
+static LetterDistribution getLetterDistribution(std::string word)
 {
-    std::map<char, int> letters;
+    LetterDistribution letters;
 
     for (auto& c : word)
     {
@@ -27,9 +30,9 @@ static std::map<char, int> getLetterDistribution(std::string word)
     return letters;
 }
 
-static bool containsLetterNTimes(const std::map<char, int>& distribution, int n)
+static bool containsLetterNTimes(const LetterDistribution& d, int n)
 {
-    for (auto& c : distribution)
+    for (auto& c : d)
     {
         if (c.second == n)
         {
@@ -39,67 +42,69 @@ static bool containsLetterNTimes(const std::map<char, int>& distribution, int n)
     return false;
 }
 
-static bool containsLetterTwice(const std::map<char, int>& distribution)
+static bool containsLetterTwice(const LetterDistribution& d)
 {
-    return containsLetterNTimes(distribution, 2);
+    return containsLetterNTimes(d, 2);
 }
 
-static bool containsLetterThreeTimes(const std::map<char, int>& distribution)
+static bool containsLetterThreeTimes(const LetterDistribution& d)
 {
-    return containsLetterNTimes(distribution, 3);
+    return containsLetterNTimes(d, 3);
 }
 
 static int calculateChecksum(const std::vector<std::string>& ids)
 {
-    int letterTwiceCount = 0;
-    int letterThreeTimesCount = 0;
+    int twice = 0;
+    int threeTimes = 0;
 
     for (auto& id : ids)
     {
-        std::map<char, int> distribution = getLetterDistribution(id);
-        if (containsLetterTwice(distribution))
+        LetterDistribution d = getLetterDistribution(id);
+        if (containsLetterTwice(d))
         {
-            letterTwiceCount++;
+            twice++;
         }
-        if (containsLetterThreeTimes(distribution))
+        if (containsLetterThreeTimes(d))
         {
-            letterThreeTimesCount++;
+            threeTimes++;
         }
     }
 
-    return letterTwiceCount * letterThreeTimesCount;
+    return twice * threeTimes;
 }
 
-static std::pair<std::string, std::string> findWordsWhichDifferByOneLetter(
-    const std::vector<std::string>& words)
+static bool differByOneLetter(const std::string& a, const std::string& b)
+{
+    int matches = 0;
+    assert(a.size() == b.size());
+    for (int i = 0; i < a.size(); ++i)
+    {
+        if (a[i] != b[i])
+        {
+            matches++;
+        }
+    }
+    return matches == 1;
+}
+
+static StringPair findWordsWhichDifferByOneLetter(const std::vector<std::string>& words)
 {
     for (int listPos = 0; listPos < words.size(); ++listPos)
     {
         for (int candidatePos = listPos + 1; candidatePos < words.size(); ++candidatePos)
         {
-            int matches = 0;
             const std::string& word = words[listPos];
             const std::string& candidate = words[candidatePos];
-
-            assert(word.size() == candidate.size());
-            for (int i = 0; i < word.size(); ++i)
+            if (differByOneLetter(word, candidate))
             {
-                if (word[i] != candidate[i])
-                {
-                    matches++;
-                }
-            }
-
-            if (matches == 1)
-            {
-                return std::pair<std::string, std::string>(word, candidate);
+                return StringPair(word, candidate);
             }
         }
     }
-    return std::pair<std::string, std::string>();
+    return StringPair();
 }
 
-static std::string removeDifferentLetters(std::pair<std::string, std::string> words)
+static std::string removeDifferentLetters(StringPair words)
 {
     assert(words.first.size() == words.second.size());
 
@@ -146,7 +151,7 @@ TEST(Day02, checksum)
 
 TEST(Day02, differByOneLetter)
 {
-    std::pair<std::string, std::string> ids = findWordsWhichDifferByOneLetter(
+    StringPair ids = findWordsWhichDifferByOneLetter(
         {"abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz"});
     ASSERT_EQ("fghij", ids.first);
     ASSERT_EQ("fguij", ids.second);
@@ -154,7 +159,7 @@ TEST(Day02, differByOneLetter)
 
 TEST(Day02, removeDifferentLetters)
 {
-    std::pair<std::string, std::string> ids = findWordsWhichDifferByOneLetter(
+    StringPair ids = findWordsWhichDifferByOneLetter(
         {"abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz"});
     ASSERT_EQ("fgij", removeDifferentLetters(ids));
     ASSERT_EQ("aaccc", removeDifferentLetters({"aabbccbbbc", "aaddccdddc", }));
