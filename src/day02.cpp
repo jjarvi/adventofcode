@@ -8,7 +8,7 @@
 #include <gtest/gtest.h>
 
 
-std::map<char, int> getLetterDistribution(std::string word)
+static std::map<char, int> getLetterDistribution(std::string word)
 {
     std::map<char, int> letters;
 
@@ -27,7 +27,7 @@ std::map<char, int> getLetterDistribution(std::string word)
     return letters;
 }
 
-bool containsLetterNTimes(const std::map<char, int>& distribution, int n)
+static bool containsLetterNTimes(const std::map<char, int>& distribution, int n)
 {
     for (auto& c : distribution)
     {
@@ -39,17 +39,17 @@ bool containsLetterNTimes(const std::map<char, int>& distribution, int n)
     return false;
 }
 
-bool containsLetterTwice(const std::map<char, int>& distribution)
+static bool containsLetterTwice(const std::map<char, int>& distribution)
 {
     return containsLetterNTimes(distribution, 2);
 }
 
-bool containsLetterThreeTimes(const std::map<char, int>& distribution)
+static bool containsLetterThreeTimes(const std::map<char, int>& distribution)
 {
     return containsLetterNTimes(distribution, 3);
 }
 
-int calculateChecksum(const std::vector<std::string>& ids)
+static int calculateChecksum(const std::vector<std::string>& ids)
 {
     int letterTwiceCount = 0;
     int letterThreeTimesCount = 0;
@@ -70,7 +70,7 @@ int calculateChecksum(const std::vector<std::string>& ids)
     return letterTwiceCount * letterThreeTimesCount;
 }
 
-std::pair<std::string, std::string> findWordsWhichDifferByOneLetter(
+static std::pair<std::string, std::string> findWordsWhichDifferByOneLetter(
     const std::vector<std::string>& words)
 {
     for (int listPos = 0; listPos < words.size(); ++listPos)
@@ -99,7 +99,7 @@ std::pair<std::string, std::string> findWordsWhichDifferByOneLetter(
     return std::pair<std::string, std::string>();
 }
 
-std::string removeDifferentLetters(std::pair<std::string, std::string> words)
+static std::string removeDifferentLetters(std::pair<std::string, std::string> words)
 {
     assert(words.first.size() == words.second.size());
 

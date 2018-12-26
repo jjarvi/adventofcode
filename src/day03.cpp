@@ -23,7 +23,7 @@ public:
     }
 };
 
-Rect parseRect(const std::string& str)
+static Rect parseRect(const std::string& str)
 {
     Rect r;
     size_t bp = str.find('#');
@@ -39,7 +39,7 @@ Rect parseRect(const std::string& str)
     return r;
 }
 
-int calculateOverlap(const std::vector<Rect>& rects)
+static int calculateOverlap(const std::vector<Rect>& rects)
 {
     auto area = std::make_unique<std::array<std::array<int, X_MAX>, Y_MAX>>();
     for (auto& a : *area)
@@ -72,13 +72,13 @@ int calculateOverlap(const std::vector<Rect>& rects)
     return overlap;
 }
 
-bool isOverlapping(const Rect& a, const Rect& b)
+static bool isOverlapping(const Rect& a, const Rect& b)
 {
     return (a.x + a.w > b.x) && (a.x < b.x + b.w) &&
         (a.y + a.h > b.y) && (a.y < b.y + b.h);
 }
 
-int findFirstNotOverlapping(const std::vector<Rect>& rects)
+static int findFirstNotOverlapping(const std::vector<Rect>& rects)
 {
     for (auto& a : rects)
     {
