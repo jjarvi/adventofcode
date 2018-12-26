@@ -8,13 +8,19 @@
 static const int Y_MAX = 1024;
 static const int X_MAX = 1024;
 
-struct Rect
+class Rect
 {
+public:
     int id;
     int x;
     int y;
     int w;
     int h;
+
+    bool operator!=(const Rect& other) const
+    {
+        return id != other.id;
+    }
 };
 
 Rect parseRect(const std::string& str)
@@ -35,8 +41,8 @@ Rect parseRect(const std::string& str)
 
 int calculateOverlap(const std::vector<Rect>& rects)
 {
-    std::array<std::array<int, X_MAX>, Y_MAX> area;
-    for (auto& a : area)
+    auto area = std::make_unique<std::array<std::array<int, X_MAX>, Y_MAX>>();
+    for (auto& a : *area)
     {
         a.fill(0);
     }
@@ -47,13 +53,13 @@ int calculateOverlap(const std::vector<Rect>& rects)
         {
             for (int y = r.y; y < r.y + r.h; ++y)
             {
-                area[x][y]++;
+                (*area)[x][y]++;
             }
         }
     }
 
     int overlap = 0;
-    for (auto& a : area)
+    for (auto& a : *area)
     {
         for (auto v : a)
         {
@@ -64,6 +70,33 @@ int calculateOverlap(const std::vector<Rect>& rects)
         }
     }
     return overlap;
+}
+
+bool isOverlapping(const Rect& a, const Rect& b)
+{
+    return (a.x + a.w > b.x) && (a.x < b.x + b.w) &&
+        (a.y + a.h > b.y) && (a.y < b.y + b.h);
+}
+
+int findFirstNotOverlapping(const std::vector<Rect>& rects)
+{
+    for (auto& a : rects)
+    {
+        bool overlaps = false;
+
+        for (auto& b : rects)
+        {
+            if (a != b && isOverlapping(a, b))
+            {
+                overlaps = true;
+            }
+        }
+        if (!overlaps)
+        {
+            return a.id;
+        }
+    }
+    return -1;
 }
 
 TEST(Day03, parseRect)
@@ -124,6 +157,20 @@ TEST(Day03, overlap_whole)
     EXPECT_EQ(4, calculateOverlap(rects));
 }
 
+TEST(Day03, isOverlapping)
+{
+    EXPECT_FALSE(isOverlapping({1, 0, 0, 1, 1}, {2, 1, 0, 1, 1}));
+    EXPECT_TRUE(isOverlapping({1, 0, 0, 1, 1}, {2, 0, 0, 1, 1}));
+    EXPECT_FALSE(isOverlapping({1, 0, 0, 1, 1}, {2, 0, 1, 1, 1}));
+    EXPECT_TRUE(isOverlapping({1, 0, 0, 2, 2}, {2, 1, 1, 2, 2}));
+}
+
+TEST(Day03, notOverlapping)
+{
+    std::vector<Rect> rects {{1, 0, 0, 2, 2}, {2, 1, 1, 2, 2}, {3, 4, 4, 2, 2}};
+    EXPECT_EQ(3, findFirstNotOverlapping(rects));
+}
+
 TEST(Day03, solution)
 {
     std::ifstream input("../day03_input.txt");
@@ -136,5 +183,5 @@ TEST(Day03, solution)
     }
 
     EXPECT_EQ(111266, calculateOverlap(claims));
+    EXPECT_EQ(266, findFirstNotOverlapping(claims));
 }
-
