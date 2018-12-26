@@ -8,6 +8,9 @@
 static const int Y_MAX = 1024;
 static const int X_MAX = 1024;
 
+using Canvas = std::array<std::array<int, X_MAX>, Y_MAX>;
+
+
 class Rect
 {
 public:
@@ -39,10 +42,11 @@ static Rect parseRect(const std::string& str)
     return r;
 }
 
-static int calculateOverlap(const std::vector<Rect>& rects)
+
+static std::unique_ptr<Canvas> createCanvas(const std::vector<Rect>& rects)
 {
-    auto area = std::make_unique<std::array<std::array<int, X_MAX>, Y_MAX>>();
-    for (auto& a : *area)
+    auto canvas = std::make_unique<Canvas>();
+    for (auto& a : *canvas)
     {
         a.fill(0);
     }
@@ -53,13 +57,19 @@ static int calculateOverlap(const std::vector<Rect>& rects)
         {
             for (int y = r.y; y < r.y + r.h; ++y)
             {
-                (*area)[x][y]++;
+                (*canvas)[x][y]++;
             }
         }
     }
+    return canvas;
+}
+
+static int calculateOverlap(const std::vector<Rect>& rects)
+{
+    auto canvas = createCanvas(rects);
 
     int overlap = 0;
-    for (auto& a : *area)
+    for (auto& a : *canvas)
     {
         for (auto v : a)
         {
