@@ -5,6 +5,7 @@ set(adventofcpp2018_VERSION_MAJOR 0)
 set(adventofcpp2018_VERSION_MINOR 1)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS -g)
 
 add_executable(aoc2018 src/day01.cpp src/day02.cpp)
 
