@@ -77,7 +77,7 @@ static bool differByOneLetter(const std::string& a, const std::string& b)
 {
     int matches = 0;
     assert(a.size() == b.size());
-    for (int i = 0; i < a.size(); ++i)
+    for (unsigned int i = 0; i < a.size(); ++i)
     {
         if (a[i] != b[i])
         {
@@ -89,9 +89,9 @@ static bool differByOneLetter(const std::string& a, const std::string& b)
 
 static StringPair findWordsWhichDifferByOneLetter(const std::vector<std::string>& words)
 {
-    for (int listPos = 0; listPos < words.size(); ++listPos)
+    for (unsigned int listPos = 0; listPos < words.size(); ++listPos)
     {
-        for (int candidatePos = listPos + 1; candidatePos < words.size(); ++candidatePos)
+        for (unsigned int candidatePos = listPos + 1; candidatePos < words.size(); ++candidatePos)
         {
             const std::string& word = words[listPos];
             const std::string& candidate = words[candidatePos];
@@ -108,7 +108,7 @@ static std::string removeDifferentLetters(StringPair words)
 {
     assert(words.first.size() == words.second.size());
 
-    for (int i = 0; i < words.first.size(); ++i)
+    for (unsigned int i = 0; i < words.first.size(); ++i)
     {
         if (words.first[i] != words.second[i])
         {
