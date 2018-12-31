@@ -38,9 +38,31 @@ static std::string findPolymer(const std::string& str)
     return polymer;
 }
 
-TEST(Day05, example)
+static size_t findShortestPolymer(const std::string& str)
+{
+    std::vector<size_t> sizes;
+    for (char c = 'a'; c <= 'z'; c++)
+    {
+        std::string candidate = str;
+        candidate.erase(std::remove_if(candidate.begin(), candidate.end(),
+            [&](char r) -> bool {
+                return ((c == r) || (c == tolower(r)));
+            }), candidate.end());
+        sizes.push_back(findPolymer(candidate).size());
+    }
+    std::sort(sizes.begin(), sizes.end());
+    return sizes.front();
+}
+
+
+TEST(Day05, example1)
 {
     EXPECT_EQ("dabCBAcaDA", findPolymer("dabAcCaCBAcCcaDA"));
+}
+
+TEST(Day05, example2)
+{
+    EXPECT_EQ(4, findShortestPolymer("dabAcCaCBAcCcaDA"));
 }
 
 TEST(Day05, solution)
@@ -49,4 +71,6 @@ TEST(Day05, solution)
     std::ifstream input("../day05_input.txt");
     std::getline(input, line);
     EXPECT_EQ(9900, findPolymer(line).size());
+    EXPECT_EQ(4992, findShortestPolymer(line));
 }
+
