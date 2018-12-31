@@ -22,7 +22,7 @@ static size_t findReactingUnits(const std::string& str, size_t begin)
         }
         prev = c;
     }
-    return std::numeric_limits<size_t>::max();
+    return std::string::npos;
 }
 
 static std::string findPolymer(const std::string& str)
@@ -30,7 +30,7 @@ static std::string findPolymer(const std::string& str)
     std::string polymer = str;
     size_t begin = 0;
     size_t pos = 0;
-    while((pos = findReactingUnits(polymer, begin)) != std::numeric_limits<size_t>::max())
+    while((pos = findReactingUnits(polymer, begin)) != std::string::npos)
     {
         begin = pos > 0 ? pos - 1 : pos;
         polymer.erase(pos, 2);
