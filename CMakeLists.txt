@@ -5,7 +5,7 @@ set(adventofcpp2018_VERSION_MAJOR 0)
 set(adventofcpp2018_VERSION_MINOR 1)
 
 set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_FLAGS "-g -Wall -Werror")
+set(CMAKE_CXX_FLAGS "-O2 -Wall -Werror")
 
 file(GLOB sources "src/*.cpp")
 add_executable(aoc2018 ${sources})
