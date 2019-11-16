@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 
+namespace day14 {
 
 class Recipes
 {
@@ -78,4 +79,6 @@ TEST(Day14, solution)
 
     // Part 2
     EXPECT_EQ(20231866, recipes.find({5, 0, 5, 9, 6, 1}));
+}
+
 }

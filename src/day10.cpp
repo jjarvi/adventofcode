@@ -5,9 +5,10 @@
 #include <fstream>
 
 
+namespace day10 {
+
 constexpr int height = 120;
 constexpr int width = 180;
-
 
 struct Point
 {
@@ -136,3 +137,4 @@ TEST(Day10, solution)
     EXPECT_EQ(10476, seconds);
 }
 
+}

@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 
+namespace day06 {
 
 static constexpr int infinite = -1;
 static constexpr int invalidIndex = -1;
@@ -204,4 +205,6 @@ TEST(Day06, solution)
     Map map(coordinates);
     EXPECT_EQ(3687, map.getLargestFiniteAreaAroundOneCoordinate());
     EXPECT_EQ(40134, map.getAreaWithMaxDistanceToEachCoordinate(10000));
+}
+
 }

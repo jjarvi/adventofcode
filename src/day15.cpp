@@ -7,7 +7,7 @@
 #include <stack>
 #include <fstream>
 
-namespace {
+namespace day15 {
 
 
 class Point

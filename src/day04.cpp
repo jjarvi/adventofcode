@@ -6,6 +6,7 @@
 
 #include <gtest/gtest.h>
 
+namespace day04 {
 
 enum class Action
 {
@@ -399,4 +400,6 @@ TEST_F(Day04Solution, part2)
     EXPECT_EQ(1783, id);
     EXPECT_EQ(44, log.getGuards().at(id).getMostSleptMinute());
     EXPECT_EQ(78452, 1783 * 44);
+}
+
 }

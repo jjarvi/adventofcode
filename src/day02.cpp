@@ -11,6 +11,8 @@ using LetterDistribution = std::map<char, int>;
 using StringPair = std::pair<std::string, std::string>;
 
 
+namespace day02 {
+
 static LetterDistribution getLetterDistribution(std::string word)
 {
     LetterDistribution letters;
@@ -179,4 +181,6 @@ TEST(Day02, solution)
     EXPECT_EQ(7657, calculateChecksum(ids));
     EXPECT_EQ("ivjhcadokeltwgsfsmqwrbnuy",
         removeDifferentLetters(findWordsWhichDifferByOneLetter(ids)));
+}
+
 }

@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+namespace day08 {
 
 class Parser
 {
@@ -115,4 +116,6 @@ TEST(Day08, solution)
     Parser p(tree);
     EXPECT_EQ(48260, p.getSumOfMetadata());
     EXPECT_EQ(25981, p.getRootValue());
+}
+
 }

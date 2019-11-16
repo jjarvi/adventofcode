@@ -3,6 +3,7 @@
 
 #include <gtest/gtest.h>
 
+namespace day05 {
 
 static bool doesReact(char a, char b)
 {
@@ -74,3 +75,4 @@ TEST(Day05, solution)
     EXPECT_EQ(4992, findShortestPolymer(line));
 }
 
+}

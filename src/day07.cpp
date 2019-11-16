@@ -7,6 +7,7 @@
 #include <map>
 #include <set>
 
+namespace day07 {
 
 class Worker
 {
@@ -249,3 +250,4 @@ TEST(Day07, solution)
     EXPECT_EQ(1014, processInParallel(steps, 5, 60));
 }
 
+}

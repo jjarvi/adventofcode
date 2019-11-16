@@ -3,7 +3,7 @@
 #include <limits>
 #include <array>
 
-
+namespace day11 {
 class Square
 {
 public:
@@ -134,4 +134,6 @@ TEST(Day11, solution)
     PowerGrid grid(sn);
     EXPECT_TRUE((Square(21, 34, 3) == grid.getSquareWithHighestPowerBySize(3)));
     EXPECT_TRUE((Square(90, 244, 16) == grid.getSquareWithHighestPower()));
+}
+
 }

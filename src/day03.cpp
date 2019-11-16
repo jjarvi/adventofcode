@@ -4,6 +4,7 @@
 
 #include <gtest/gtest.h>
 
+namespace day03 {
 
 static const int Y_MAX = 1024;
 static const int X_MAX = 1024;
@@ -194,4 +195,6 @@ TEST(Day03, solution)
 
     EXPECT_EQ(111266, calculateOverlap(claims));
     EXPECT_EQ(266, findFirstNotOverlapping(claims));
+}
+
 }

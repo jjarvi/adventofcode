@@ -5,6 +5,7 @@
 
 #include <gtest/gtest.h>
 
+namespace day01 {
 
 static int sum(const std::vector<int>& values)
 {
@@ -72,4 +73,6 @@ TEST(Day01, solution)
 
     EXPECT_EQ(420, sum(values));
     EXPECT_EQ(227, findFirstDuplicateFrequency(values));
+}
+
 }

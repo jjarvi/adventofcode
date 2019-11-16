@@ -3,6 +3,7 @@
 #include <vector>
 #include <numeric>
 
+namespace day12 {
 
 class Pots
 {
@@ -161,4 +162,6 @@ TEST(Day12, solution)
         prevDelta = delta;
         round++; 
     }
+}
+
 }

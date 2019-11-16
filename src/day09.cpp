@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <list>
 
+namespace day09 {
 
 static void incrementByTwo(std::list<int>::iterator& it, std::list<int>& container)
 {
@@ -71,4 +72,6 @@ TEST(Day09, solution)
 {
     EXPECT_EQ(371284, getHighscore(473, 70904));
     EXPECT_EQ(3038972494, getHighscore(473, 70904 * 100));
+}
+
 }

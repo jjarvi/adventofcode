@@ -5,6 +5,8 @@
 #include <array>
 
 
+namespace day13 {
+
 enum class Direction : int
 {
     Left = 0,
@@ -651,4 +653,6 @@ TEST_F(Day13, solution)
     }
     EXPECT_EQ(44, carts[0].x);
     EXPECT_EQ(56, carts[0].y);
+}
+
 }
