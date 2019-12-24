@@ -12,6 +12,7 @@ add_executable(aoc2018 ${sources})
 
 add_subdirectory(src/googletest)
 include_directories(src/googletest/googletest/include/)
+include_directories(src/googletest/googlemock/include/)
 enable_testing()
 
 target_link_libraries(aoc2018 gtest gtest_main)
