@@ -610,7 +610,7 @@ static void parse(const char* filename, std::vector<Sample>& samples,
             }
         }
     }
-    catch(std::exception e)
+    catch(std::exception& e)
     {
         std::cerr << e.what() << std::endl;
     }
