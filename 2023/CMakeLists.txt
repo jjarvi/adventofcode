@@ -9,6 +9,7 @@ set(CMAKE_CXX_FLAGS "-O3 -Wall -Werror")
 
 add_executable(aoc2023
     src/main.cpp
-    src/day01.cpp)
+    src/day01.cpp
+    src/day02.cpp)
 
 target_link_libraries(aoc2023 CppUTest)
