@@ -1,0 +1,54 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cmake",
+            "label": "Configure",
+            "command": "configure",
+            "problemMatcher": [],
+            "detail": "Run cmake configure"
+        },
+        {
+            "type": "cmake",
+            "label": "Build All",
+            "command": "build",
+            "targets": [
+                "all"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "detail": "Build Advent of Code"
+        },
+        {
+            "type": "cmake",
+            "label": "Build 2018",
+            "command": "build",
+            "targets": [
+                "aoc2018"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "detail": "Build Advent of Code 2018"
+        },
+        {
+            "type": "cmake",
+            "label": "Build 2023",
+            "command": "build",
+            "targets": [
+                "aoc2023"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "detail": "Build Advent of Code 2023"
+        },
+    ]
+}

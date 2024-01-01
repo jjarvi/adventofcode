@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run 2018",
+            "program": "${workspaceFolder}/build/2018/aoc2018",
+            "type": "cppdbg",
+            "request": "launch",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Run 2023",
+            "program": "${workspaceFolder}/build/2023/aoc2023",
+            "type": "cppdbg",
+            "request": "launch",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
