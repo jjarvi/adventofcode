@@ -2,8 +2,11 @@
 #include <string>
 #include <vector>
 #include <set>
+#include <filesystem>
 
 #include <gtest/gtest.h>
+
+#include "PuzzleInputs.hpp"
 
 namespace day01 {
 
@@ -57,8 +60,8 @@ TEST(Day01, duplicates)
 
 TEST(Day01, solution)
 {
-    std::ifstream input("../day01_input.txt");
-
+    std::ifstream input(puzzleInputs::getInputDirectory() /  "day01_input.txt");
+    EXPECT_TRUE(input.is_open());
     std::vector<int> values;
     std::string line;
     while (std::getline(input, line))

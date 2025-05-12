@@ -3,7 +3,11 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <filesystem>
 
+#include <gtest/gtest.h>
+
+#include "PuzzleInputs.hpp"
 
 namespace day10 {
 
@@ -108,7 +112,8 @@ TEST(Day10, solution)
     constexpr bool printResult = false;
     constexpr size_t expectedLineSize = 43;
     std::vector<Point> points;
-    std::ifstream input("../day10_input.txt");
+    std::ifstream input(puzzleInputs::getInputDirectory() / "day10_input.txt");
+    EXPECT_TRUE(input.is_open());
     std::string line;
 
     while (std::getline(input, line))

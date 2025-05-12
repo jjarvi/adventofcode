@@ -1,7 +1,10 @@
 #include <string>
 #include <fstream>
+#include <filesystem>
 
 #include <gtest/gtest.h>
+
+#include "PuzzleInputs.hpp"
 
 namespace day05 {
 
@@ -69,7 +72,8 @@ TEST(Day05, example2)
 TEST(Day05, solution)
 {
     std::string line;
-    std::ifstream input("../day05_input.txt");
+    std::ifstream input(puzzleInputs::getInputDirectory() / "day05_input.txt");
+    EXPECT_TRUE(input.is_open());
     std::getline(input, line);
     EXPECT_EQ(9900, findPolymer(line).size());
     EXPECT_EQ(4992, findShortestPolymer(line));

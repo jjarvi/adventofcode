@@ -3,6 +3,11 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <filesystem>
+
+#include <gtest/gtest.h>
+
+#include "PuzzleInputs.hpp"
 
 namespace day08 {
 
@@ -101,7 +106,8 @@ TEST(Day08, example)
 TEST(Day08, solution)
 {
     std::vector<int> tree;
-    std::ifstream input("../day08_input.txt");
+    std::ifstream input(puzzleInputs::getInputDirectory() / "day08_input.txt");
+    EXPECT_TRUE(input.is_open());
     std::string line;
     while (std::getline(input, line))
     {

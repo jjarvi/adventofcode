@@ -14,6 +14,13 @@ add_executable(aoc2018
     src/day13.cpp
     src/day14.cpp
     src/day15.cpp
-    src/day16.cpp)
+    src/day16.cpp
+)
 
-target_link_libraries(aoc2018 gtest gtest_main)
+target_link_libraries(aoc2018
+    gtest
+    gtest_main
+    libPuzzleInputs
+)
+
+target_compile_definitions(aoc2018 PUBLIC APP_ROOT_DIR="${CMAKE_CURRENT_SOURCE_DIR}")

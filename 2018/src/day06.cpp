@@ -1,9 +1,12 @@
-#include <gtest/gtest.h>
-
 #include <vector>
 #include <limits>
 #include <string>
 #include <fstream>
+#include <filesystem>
+
+#include <gtest/gtest.h>
+
+#include "PuzzleInputs.hpp"
 
 namespace day06 {
 
@@ -189,7 +192,8 @@ TEST(Day06, part1_example)
 TEST(Day06, solution)
 {
     std::vector<Point> coordinates;
-    std::ifstream input("../day06_input.txt");
+    std::ifstream input(puzzleInputs::getInputDirectory() / "day06_input.txt");
+    EXPECT_TRUE(input.is_open());
     std::string line;
 
     while (std::getline(input, line))

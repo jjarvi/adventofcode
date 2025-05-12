@@ -1,11 +1,14 @@
-#include <gtest/gtest.h>
-
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
 #include <map>
 #include <set>
+#include <filesystem>
+
+#include <gtest/gtest.h>
+
+#include "PuzzleInputs.hpp"
 
 namespace day07 {
 
@@ -244,7 +247,8 @@ TEST_F(Day07Example, second)
 
 TEST(Day07, solution)
 {
-    std::ifstream input("../day07_input.txt");
+    std::ifstream input(puzzleInputs::getInputDirectory() / "day07_input.txt");
+    EXPECT_TRUE(input.is_open());
     std::map<char, std::set<char>> steps = parseInput(input);
     EXPECT_EQ("EUGJKYFQSCLTWXNIZMAPVORDBH", sortSteps(steps));
     EXPECT_EQ(1014, processInParallel(steps, 5, 60));

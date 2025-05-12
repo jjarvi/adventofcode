@@ -3,8 +3,11 @@
 #include <cstdint>
 #include <vector>
 #include <sstream>
+#include <filesystem>
 
 #include <CppUTest/TestHarness.h>
+
+#include "PuzzleInputs.hpp"
 
 namespace Aoc2023::Day02
 {
@@ -292,7 +295,7 @@ TEST_GROUP(Solution)
 {
     void setup()
     {
-        input.open("../inputs/day02_input.txt");
+        input.open(puzzleInputs::getInputDirectory() / "day02_input.txt");
         CHECK_TRUE(input.is_open());
     }
 

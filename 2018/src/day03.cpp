@@ -1,8 +1,11 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <filesystem>
 
 #include <gtest/gtest.h>
+
+#include "PuzzleInputs.hpp"
 
 namespace day03 {
 
@@ -184,7 +187,8 @@ TEST(Day03, notOverlapping)
 
 TEST(Day03, solution)
 {
-    std::ifstream input("../day03_input.txt");
+    std::ifstream input(puzzleInputs::getInputDirectory() / "day03_input.txt");
+    EXPECT_TRUE(input.is_open());
     std::string claim;
     std::vector<Rect> claims;
 

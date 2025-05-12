@@ -3,7 +3,11 @@
 #include <vector>
 #include <fstream>
 #include <array>
+#include <filesystem>
 
+#include <gtest/gtest.h>
+
+#include "PuzzleInputs.hpp"
 
 namespace day13 {
 
@@ -635,7 +639,8 @@ TEST_F(Day13, collisions)
 
 TEST_F(Day13, solution)
 {
-    std::ifstream input("../day13_input.txt");
+    std::ifstream input(puzzleInputs::getInputDirectory() / "day13_input.txt");
+    EXPECT_TRUE(input.is_open());
     SetUp(input);
 
     // Part 1

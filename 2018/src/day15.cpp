@@ -6,6 +6,11 @@
 #include <memory>
 #include <stack>
 #include <fstream>
+#include <filesystem>
+
+#include <gtest/gtest.h>
+
+#include "PuzzleInputs.hpp"
 
 namespace day15 {
 
@@ -936,7 +941,8 @@ TEST(Day15, example2)
 
 TEST(Day15, part1Solution)
 {
-    std::ifstream input("../day15_input.txt");
+    std::ifstream input(puzzleInputs::getInputDirectory() / "day15_input.txt");
+    EXPECT_TRUE(input.is_open());
     Map map(input);
     Game game(map);
     game.run();
@@ -958,7 +964,8 @@ TEST(Day15, part2Solution)
     };
 
     int elfDamage = Unit::normalDamage + 1;
-    std::ifstream input("../day15_input.txt");
+    std::ifstream input(puzzleInputs::getInputDirectory() / "day15_input.txt");
+    EXPECT_TRUE(input.is_open());
     Map scenario(input);
 
     while (true)

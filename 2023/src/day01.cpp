@@ -3,8 +3,11 @@
 #include <map>
 #include <string>
 #include <span>
+#include <filesystem>
 
 #include <CppUTest/TestHarness.h>
+
+#include "PuzzleInputs.hpp"
 
 namespace Aoc2023::Day01
 {
@@ -43,9 +46,9 @@ TEST_GROUP(Day01)
 {
     using ListOfStrings = std::span<const char* const>;
 
-    int sumCalibrationValues(const char* filename, const ListOfStrings allowedNumbers)
+    int sumCalibrationValues(const std::filesystem::path& filepath, const ListOfStrings allowedNumbers)
     {
-        std::ifstream input(filename);
+        std::ifstream input(filepath);
         CHECK_TRUE(input.is_open());
 
         int sum = 0;
@@ -115,11 +118,11 @@ TEST(Day01, part2InputDecoding)
 
 TEST(Day01, part1)
 {
-    CHECK_EQUAL(53974, sumCalibrationValues("../inputs/day01_input.txt", digits));
+    CHECK_EQUAL(53974, sumCalibrationValues(puzzleInputs::getInputDirectory() / "day01_input.txt", digits));
 }
 
 TEST(Day01, part2)
 {
-    CHECK_EQUAL(52840, sumCalibrationValues("../inputs/day01_input.txt", digitsAndWords));
+    CHECK_EQUAL(52840, sumCalibrationValues(puzzleInputs::getInputDirectory() / "day01_input.txt", digitsAndWords));
 }
 }

@@ -3,8 +3,11 @@
 #include <sstream>
 #include <chrono>
 #include <functional>
+#include <filesystem>
 
 #include <gtest/gtest.h>
+
+#include "PuzzleInputs.hpp"
 
 namespace day04 {
 
@@ -282,7 +285,8 @@ class Day04Solution : public ::testing::Test
 protected:
     static void SetUpTestCase()
     {
-        std::ifstream input("../day04_input.txt");
+        std::ifstream input(puzzleInputs::getInputDirectory() / "day04_input.txt");
+        EXPECT_TRUE(input.is_open());
         std::string line;
         std::vector<LogEntry> entries;
         while (std::getline(input, line))

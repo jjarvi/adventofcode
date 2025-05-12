@@ -4,8 +4,11 @@
 #include <vector>
 #include <assert.h>
 #include <utility>
+#include <filesystem>
 
 #include <gtest/gtest.h>
+
+#include "PuzzleInputs.hpp"
 
 using LetterDistribution = std::map<char, int>;
 using StringPair = std::pair<std::string, std::string>;
@@ -169,7 +172,8 @@ TEST(Day02, removeDifferentLetters)
 
 TEST(Day02, solution)
 {
-    std::ifstream input("../day02_input.txt");
+    std::ifstream input(puzzleInputs::getInputDirectory() / "day02_input.txt");
+    EXPECT_TRUE(input.is_open());
     std::vector<std::string> ids;
     std::string id;
 

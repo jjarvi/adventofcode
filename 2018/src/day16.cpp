@@ -7,6 +7,11 @@
 #include <vector>
 #include <set>
 #include <map>
+#include <filesystem>
+
+#include <gtest/gtest.h>
+
+#include "PuzzleInputs.hpp"
 
 namespace day16 {
 
@@ -562,12 +567,13 @@ TEST_F(Day16, example)
 }
 
 
-static void parse(const char* filename, std::vector<Sample>& samples,
+static void parse(const std::filesystem::path& filepath, std::vector<Sample>& samples,
     std::vector<Registers>& instructions)
 {
     try
     {
-        std::ifstream input(filename);
+        std::ifstream input(filepath);
+        EXPECT_TRUE(input.is_open());
         std::string line;
         bool readSamples = true;
         int emptyLines = 0;
@@ -684,7 +690,7 @@ TEST_F(Day16, solution)
     int partOneAnswer = 0;
     std::map<int, std::set<OpCode>> candidates;
 
-    parse("../day16_input.txt", samples, instructions);
+    parse(puzzleInputs::getInputDirectory() / "day16_input.txt", samples, instructions);
 
     for (const auto& sample : samples)
     {
