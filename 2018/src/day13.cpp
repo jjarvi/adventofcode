@@ -9,7 +9,7 @@
 
 #include "PuzzleInputs.hpp"
 
-namespace day13 {
+namespace aoc2018::day13 {
 
 enum class Direction : int
 {

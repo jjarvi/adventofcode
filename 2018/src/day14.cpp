@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 
-namespace day14 {
+namespace aoc2018::day14 {
 
 class Recipes
 {

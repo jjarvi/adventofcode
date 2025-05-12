@@ -8,7 +8,7 @@
 
 #include "PuzzleInputs.hpp"
 
-namespace day01 {
+namespace aoc2018::day01 {
 
 static int sum(const std::vector<int>& values)
 {

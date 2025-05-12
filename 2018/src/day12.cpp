@@ -3,7 +3,7 @@
 #include <vector>
 #include <numeric>
 
-namespace day12 {
+namespace aoc2018::day12 {
 
 class Pots
 {

@@ -6,7 +6,7 @@
 
 #include "PuzzleInputs.hpp"
 
-namespace day05 {
+namespace aoc2018::day05 {
 
 static bool doesReact(char a, char b)
 {

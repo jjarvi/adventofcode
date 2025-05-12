@@ -14,7 +14,7 @@ using LetterDistribution = std::map<char, int>;
 using StringPair = std::pair<std::string, std::string>;
 
 
-namespace day02 {
+namespace aoc2018::day02 {
 
 static LetterDistribution getLetterDistribution(std::string word)
 {

@@ -8,7 +8,7 @@
 
 #include "PuzzleInputs.hpp"
 
-namespace day06 {
+namespace aoc2018::day06 {
 
 static constexpr int infinite = -1;
 static constexpr int invalidIndex = -1;

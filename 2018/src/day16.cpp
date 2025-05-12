@@ -13,7 +13,7 @@
 
 #include "PuzzleInputs.hpp"
 
-namespace day16 {
+namespace aoc2018::day16 {
 
 enum class OpCode : int
 {

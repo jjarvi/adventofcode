@@ -9,7 +9,7 @@
 
 #include "PuzzleInputs.hpp"
 
-namespace Aoc2023::Day01
+namespace aoc2023::day01
 {
 namespace
 {

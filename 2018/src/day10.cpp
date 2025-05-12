@@ -9,7 +9,7 @@
 
 #include "PuzzleInputs.hpp"
 
-namespace day10 {
+namespace aoc2018::day10 {
 
 constexpr int height = 120;
 constexpr int width = 180;

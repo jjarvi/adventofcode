@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <list>
 
-namespace day09 {
+namespace aoc2018::day09 {
 
 static void incrementByTwo(std::list<int>::iterator& it, std::list<int>& container)
 {

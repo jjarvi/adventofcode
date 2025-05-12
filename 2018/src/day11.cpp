@@ -3,7 +3,7 @@
 #include <limits>
 #include <array>
 
-namespace day11 {
+namespace aoc2018::day11 {
 class Square
 {
 public:

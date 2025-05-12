@@ -9,7 +9,7 @@
 
 #include "PuzzleInputs.hpp"
 
-namespace day08 {
+namespace aoc2018::day08 {
 
 class Parser
 {

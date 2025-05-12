@@ -12,7 +12,7 @@
 
 #include "PuzzleInputs.hpp"
 
-namespace day15 {
+namespace aoc2018::day15 {
 
 
 class Point

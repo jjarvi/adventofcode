@@ -9,7 +9,7 @@
 
 #include "PuzzleInputs.hpp"
 
-namespace day04 {
+namespace aoc2018::day04 {
 
 enum class Action
 {

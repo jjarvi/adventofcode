@@ -10,7 +10,7 @@
 
 #include "PuzzleInputs.hpp"
 
-namespace day07 {
+namespace aoc2018::day07 {
 
 class Worker
 {

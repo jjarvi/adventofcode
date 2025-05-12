@@ -7,7 +7,7 @@
 
 #include "PuzzleInputs.hpp"
 
-namespace day03 {
+namespace aoc2018::day03 {
 
 static const int Y_MAX = 1024;
 static const int X_MAX = 1024;
